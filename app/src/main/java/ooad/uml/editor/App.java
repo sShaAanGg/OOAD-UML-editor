@@ -40,7 +40,7 @@ public class App {
         frame.getContentPane().add(toolBarPanel, BorderLayout.WEST);
         frame.getContentPane().add(canvas, BorderLayout.CENTER);
         frame.setJMenuBar(menubar);
-        
+
         // Display the window.
         frame.pack();
         frame.setVisible(true);
