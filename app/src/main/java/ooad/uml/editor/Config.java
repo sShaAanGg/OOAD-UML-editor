@@ -8,101 +8,56 @@ import java.awt.*;
  * <p>
  * Use the singleton pattern since only 1 instance of Config is needed.
  * https://en.wikipedia.org/wiki/Singleton_pattern
+ * <p>
+ * The problem is: whenever a new graphic class is introduced, this file
+ * probably needs to be changed. As more classes are added, it also becomes
+ * larger and larger.
+ * <p>
+ * The solution is: (Refactor) **keep minimal, component independent**
+ * information such as `screenWidth`, `screenHeight` stored in Config.java.
+ * Move other component dependent info to their own class.
  */
 public class Config {
     private static Config instance = new Config(); // eager initialization
-    private Dimension windowSize;
-    private Point windowLocation;
-
-    private Dimension canvasSize;
-    private Color canvasColor;
-
-    private Color menuBarColor;
-    private Dimension menuSize;
-
-    private Dimension toolBarPanelSize;
-    private Color toolBarPanelColor;
-    private Dimension toolBarSize;
-    private Color toolBarColor;
-
-    private final int buttonCount = 6; // Default number of buttons in the left hand side toolbar
-    private Dimension buttonSize;
+    /*
+     * They are kink of componet independent information
+     * since windowWidth and windowHeight are related to
+     * the size of the screen which is component independent.
+     * 
+     * * They will be uesd to calculate the size of other components.
+     */
+    private double screenWidth;
+    private double screenHeight;
+    private int windowWidth;
+    private int windowHeight;
 
     /** Declared as private to make sure that nobody can call the constructor */
     private Config() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        double factor1 = 0.6;
-        double factor2 = 0.2;
-
-        // Store the values of windowWidth and windowHeight to prevent duplicated calls
-        double screenWidth = screenSize.getWidth();
-        double screenHeight = screenSize.getHeight();
-        int windowWidth = (int) (screenWidth * 0.5);
-        int windowHeight = (int) (screenHeight * 0.7);
-
-        windowSize = new Dimension(windowWidth, windowHeight);
-        windowLocation = new Point((int) screenWidth / 4, (int) screenHeight / 8);
-
-        canvasSize = new Dimension((int) (windowWidth * factor1), (int) (windowHeight));
-        canvasColor = Color.WHITE;
-
-        menuBarColor = Color.LIGHT_GRAY;
-        menuSize = new Dimension(40, 40);
-
-        toolBarPanelSize = new Dimension((int) (windowWidth * factor2), windowHeight);
-        toolBarPanelColor = Color.LIGHT_GRAY;
-        toolBarSize = toolBarPanelSize;
-        toolBarColor = toolBarPanelColor;
-
-        buttonSize = new Dimension((int) (windowWidth * factor2 - 20), (int) windowHeight / (buttonCount + 1));
+        this.screenWidth = screenSize.getWidth();
+        this.screenHeight = screenSize.getHeight();
+        this.windowWidth = (int) (screenWidth * 0.5);
+        this.windowHeight = (int) (screenHeight * 0.7);
     }
 
     public static Config getInstance() {
         return instance;
     }
 
-    public Dimension getWindowSize() {
-        return windowSize;
+    public double getScreenWidth() {
+        return screenWidth;
     }
 
-    public Point getWindowLocation() {
-        return windowLocation;
+    public double getScreenHeight() {
+        return screenHeight;
     }
 
-    public Dimension getCanvasSize() {
-        return canvasSize;
+    public int getWindowWidth() {
+        return windowWidth;
     }
 
-    public Color getCanvasColor() {
-        return canvasColor;
-    }
-
-    public Color getMenuBarColor() {
-        return menuBarColor;
-    }
-
-    public Dimension getMenuSize() {
-        return menuSize;
-    }
-
-    public Dimension getToolBarPanelSize() {
-        return toolBarPanelSize;
-    }
-
-    public Color getToolBarPanelColor() {
-        return toolBarPanelColor;
-    }
-
-    public Dimension getToolBarSize() {
-        return toolBarSize;
-    }
-
-    public Color getToolBarColor() {
-        return toolBarColor;
-    }
-
-    public Dimension getButtonSize() {
-        return buttonSize;
+    public int getWindowHeight() {
+        return windowHeight;
     }
 
 }

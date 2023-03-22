@@ -44,3 +44,10 @@ OS:           Linux 5.15.90.1-microsoft-standard-WSL2 amd64
 
 ## To buld and run the editor application
 `❯ ./gradlew run` in the shell (apparently, `gradle` is required to build and run the editor when use the command).
+
+## About maintainability
+- Config.java
+    - The problem is: whenever a **new graphic class is introduced**, this file probably **needs to be changed**.  
+    Maybe move these configuration setting to the corresponding graphic class will be better.
+    - The solution is: (Refactor) **keep minimal, component independent** information such as `screenWidth`, `screenHeight` stored in Config.java. Move other component dependent info to their own class.
+- 

@@ -1,5 +1,7 @@
 package ooad.uml.editor.graphics.toolbar;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -18,24 +20,34 @@ public class ToolBarPanel extends JPanel {
         this.toolBar.setAlignmentX(CENTER_ALIGNMENT);
         this.toolBar.setFloatable(false);
         this.toolBar.setRollover(true);
-        this.toolBar.setBackground(Config.getInstance().getToolBarColor());
-        this.toolBar.setPreferredSize(Config.getInstance().getToolBarSize());
+        this.toolBar.setBackground(Color.LIGHT_GRAY);
+
+        int toolBarWidth = (int) (Config.getInstance().getWindowWidth() * 0.2);
+        int toolBarHeight = Config.getInstance().getWindowHeight();
+        Dimension toolBarSize = new Dimension(toolBarWidth, toolBarHeight);
+        this.toolBar.setPreferredSize(toolBarSize);
+        
+        Dimension toolBarPanelSize = toolBarSize;
         this.add(toolBar);
-        this.setBackground(Config.getInstance().getToolBarPanelColor());
-        this.setPreferredSize(Config.getInstance().getToolBarPanelSize());
+        this.setBackground(Color.LIGHT_GRAY);
+        this.setPreferredSize(toolBarPanelSize);
         this.buttonGroup = new ButtonGroup();
 
-        /**
-         * Create `Button` references to subclass Buttons for polymorphism to work.
-         */
+        // Create `Button` references to subclass Buttons for polymorphism to work, then add the buttons to this.tooBar.
+        createButtons();
+    }
+    
+    /**
+     * Create `Button` references to subclass Buttons for polymorphism to work, then add the buttons to this.tooBar.
+     */
+    private void createButtons() {
         Button selectButton = new SelectButton("select");
         Button associationLineButton = new AssociationLineButton("association line");
         Button generalizationLineButton = new GeneralizationLineButton("generalization line");
         Button compositionLineButton = new CompositionLineButton("composition line");
         Button classButton = new ClassButton("class");
         Button useCaseButton = new UseCaseButton("use case");
-        
-        // Add buttons to this.toolBar
+
         this.addButtons(selectButton);
         this.addButtons(associationLineButton);
         this.addButtons(generalizationLineButton);

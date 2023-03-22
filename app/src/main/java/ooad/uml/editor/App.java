@@ -31,18 +31,18 @@ public class App {
 
     /** Starts the GUI application */
     private void start() {
-        Window frame = new Window("My OOAD UML Editor");
+        Window window = new Window("My OOAD UML Editor");
         Canvas canvas = new Canvas();
         MenuBar menubar = new MenuBar();
         ToolBarPanel toolBarPanel = new ToolBarPanel();
 
-        frame.getContentPane().setLayout(new BorderLayout());
-        frame.getContentPane().add(toolBarPanel, BorderLayout.WEST);
-        frame.getContentPane().add(canvas, BorderLayout.CENTER);
-        frame.setJMenuBar(menubar);
+        window.getContentPane().setLayout(new BorderLayout());
+        window.getContentPane().add(toolBarPanel, BorderLayout.WEST);
+        window.getContentPane().add(canvas, BorderLayout.CENTER);
+        window.setJMenuBar(menubar);
 
         // Display the window.
-        frame.pack();
-        frame.setVisible(true);
+        window.pack();
+        window.setVisible(true);
     }
 }

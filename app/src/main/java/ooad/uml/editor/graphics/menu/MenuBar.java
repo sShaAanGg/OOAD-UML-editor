@@ -1,8 +1,8 @@
 package ooad.uml.editor.graphics.menu;
 
 import javax.swing.JMenuBar;
+import java.awt.Color;
 
-import ooad.uml.editor.Config;
 import ooad.uml.editor.graphics.menu.editmenu.EditMenu;
 import ooad.uml.editor.graphics.menu.filemenu.FileMenu;
 
@@ -24,7 +24,7 @@ public class MenuBar extends JMenuBar {
 
         this.add(fileMenu);
         this.add(editMenu);
-        this.setBackground(Config.getInstance().getMenuBarColor());
+        this.setBackground(Color.LIGHT_GRAY);
     }
 
 }

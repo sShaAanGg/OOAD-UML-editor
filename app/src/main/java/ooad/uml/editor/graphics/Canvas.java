@@ -1,6 +1,8 @@
 package ooad.uml.editor.graphics;
 
 import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dimension;
 
 import ooad.uml.editor.Config;
 
@@ -14,7 +16,10 @@ import ooad.uml.editor.Config;
  */
 public class Canvas extends JPanel {
     public Canvas() {
-        this.setMinimumSize(Config.getInstance().getCanvasSize());
-        this.setBackground(Config.getInstance().getCanvasColor());
+        int windowWidth = Config.getInstance().getWindowWidth();
+        int windowHeight = Config.getInstance().getWindowHeight();
+        Dimension canvasSize = new Dimension((int) (windowWidth * 0.6), (int) (windowHeight));
+        this.setMinimumSize(canvasSize);
+        this.setBackground(Color.WHITE);
     }
 }
