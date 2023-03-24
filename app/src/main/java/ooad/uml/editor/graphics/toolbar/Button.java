@@ -1,10 +1,10 @@
 package ooad.uml.editor.graphics.toolbar;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+import javax.swing.JToggleButton;
 import java.awt.Color;
 import java.awt.Dimension;
-
+import ooad.uml.editor.listener.UMLActionListener;
 import ooad.uml.editor.Config;
 
 /**
@@ -12,7 +12,7 @@ import ooad.uml.editor.Config;
  * <p>
  * - [X] A Button is a JButton
  */
-public class Button extends JButton {
+public class Button extends JToggleButton {
     private static final int buttonCount = 6; // Number of buttons in the LHS toolbar, it belongs to this class `Button`
     
     public Button(String name) {
@@ -22,7 +22,7 @@ public class Button extends JButton {
         Dimension buttonSize = new Dimension((int) (windowWidth * 0.2 - 20), (int) windowHeight / (buttonCount + 1));
         this.setPreferredSize(buttonSize);
         this.setBackground(Color.WHITE);
-        // this.addActionListener(new ActionListener());
+        this.addActionListener(UMLActionListener.getInstance());
     }
 
     /**

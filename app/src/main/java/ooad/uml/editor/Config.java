@@ -1,6 +1,7 @@
 package ooad.uml.editor;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  * This class represents the GUI configuration of the application.

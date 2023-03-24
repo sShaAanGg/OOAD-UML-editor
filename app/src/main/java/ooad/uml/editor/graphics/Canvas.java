@@ -3,8 +3,8 @@ package ooad.uml.editor.graphics;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
-
 import ooad.uml.editor.Config;
+import ooad.uml.editor.listener.UMLActionListener;
 
 /**
  * This class represents the canvas area in which all UML objects reside.
@@ -21,5 +21,6 @@ public class Canvas extends JPanel {
         Dimension canvasSize = new Dimension((int) (windowWidth * 0.6), (int) (windowHeight));
         this.setMinimumSize(canvasSize);
         this.setBackground(Color.WHITE);
+        this.addMouseListener(UMLActionListener.getInstance());
     }
 }

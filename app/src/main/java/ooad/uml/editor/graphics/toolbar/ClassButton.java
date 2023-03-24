@@ -7,5 +7,6 @@ public class ClassButton extends Button {
         super(name);
         this.setIcon(this.getButtonIcon(iconPath, name));
         this.setText("");
+        this.setActionCommand("ClassButton");
     }
 }
