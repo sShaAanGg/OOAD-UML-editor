@@ -4,7 +4,6 @@ import ooad.uml.editor.graphics.Canvas;
 import ooad.uml.editor.graphics.Window;
 import ooad.uml.editor.graphics.menu.MenuBar;
 import ooad.uml.editor.graphics.toolbar.ToolBarPanel;
-
 import java.awt.BorderLayout;
 
 /**
@@ -12,8 +11,8 @@ import java.awt.BorderLayout;
  */
 public class App {
 
-    /** Declared as private to make sure that nobody can call the constructor */
-    private App() {
+    /** Only for debugging */
+    public App() {
     }
 
     public static void main(String[] args) {

@@ -4,25 +4,29 @@ import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 import java.awt.Color;
 import java.awt.Dimension;
-import ooad.uml.editor.listener.UMLActionListener;
+import ooad.uml.editor.response.*;
 import ooad.uml.editor.Config;
 
 /**
  * This class represents a button in the toolbar.
  * <p>
  * - [X] A Button is a JButton
+ * <p>
+ * When a button is clicked, the actual response in the ResponseDispatcher is set.
+ * Later mouse events will be responded with the methods in the second parameter of 
+ * the constructor {@link #Button(String, Response)}.
  */
 public class Button extends JToggleButton {
     private static final int buttonCount = 6; // Number of buttons in the LHS toolbar, it belongs to this class `Button`
     
-    public Button(String name) {
+    public Button(String name, Response response) {
         super(name);
         int windowWidth = Config.getInstance().getWindowWidth();
         int windowHeight = Config.getInstance().getWindowHeight();
         Dimension buttonSize = new Dimension((int) (windowWidth * 0.2 - 20), (int) windowHeight / (buttonCount + 1));
         this.setPreferredSize(buttonSize);
         this.setBackground(Color.WHITE);
-        this.addActionListener(UMLActionListener.getInstance());
+        this.addActionListener(actionEvent -> ResponseDispatcher.getInstance().setResponse(response)); // Use lamda expression
     }
 
     /**

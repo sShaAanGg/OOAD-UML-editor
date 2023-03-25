@@ -1,19 +1,20 @@
-package ooad.uml.editor.action;
+package ooad.uml.editor.response;
 
-// import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
+
 import ooad.uml.editor.graphics.Canvas;
 import ooad.uml.editor.graphics.UML.UMLObject;
 
-public class CreateObjectAction extends BasicAction {
+public class ConnectObjectResponse extends Response {
 
-    public CreateObjectAction() {
+    public ConnectObjectResponse() {
+        super("connect");
     }
 
     @Override
     public void canvasClicked(MouseEvent e, Canvas canvas) {
         // TODO Auto-generated method stub
-        
+        throw new UnsupportedOperationException("Unimplemented method 'canvasClicked'");
     }
 
     @Override
