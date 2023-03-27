@@ -10,24 +10,22 @@ import javax.swing.JLabel;
 public class UseCaseObject extends BasicObject {
     private final Ellipse2D outerEllipse;
     private final Ellipse2D innerEllipse;
-    private static final int width = 200;
-    private static final int height = 100;
     
     public UseCaseObject(int coordinateX, int coordinateY) {
-        super(coordinateX, coordinateY, new JLabel("Use Case", JLabel.CENTER));
-        outerEllipse = new Ellipse2D.Double(0, 0, width, height);
+        super(coordinateX, coordinateY, 200, 100, new JLabel("Use Case", JLabel.CENTER));
+        outerEllipse = new Ellipse2D.Double(0, 0, this.width, this.height);
         double borderSize = 1.5;
-        innerEllipse = new Ellipse2D.Double(borderSize, borderSize, width - borderSize*2, height - borderSize*2);
+        innerEllipse = new Ellipse2D.Double(borderSize, borderSize, this.width - borderSize*2, this.height - borderSize*2);
         
-        this.setSize(width, height); // **Without it, the object will not be drawn since it sets the JPanel's size**
-        this.name.setBounds(0, 0, width, height);
+        this.setSize(this.width, this.height); // **Without it, the object will not be drawn since it sets the JPanel's size**
+        this.name.setBounds(0, 0, this.width, this.height);
         this.setLayout(null);
         this.setOpaque(false);
         this.setVisible(true);
     }
 
     @Override
-    public void drawObject(Graphics2D g2) {
+    protected void drawObject(Graphics2D g2) {
         g2.setPaint(this.borderColor);
         g2.fill(outerEllipse);
         g2.setPaint(this.objectColor);

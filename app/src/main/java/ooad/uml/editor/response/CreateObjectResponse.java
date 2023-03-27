@@ -15,8 +15,7 @@ public class CreateObjectResponse extends Response {
     private BasicObjectProducer producer;
 
     /**
-     * 
-     * @param producer the producer of the basic object, which is a functional interface
+     * @param producer the producer produces the basic object
      */
     public CreateObjectResponse(BasicObjectProducer producer) {
         super("create");
@@ -26,6 +25,7 @@ public class CreateObjectResponse extends Response {
     @Override
     public void canvasClicked(MouseEvent e, Canvas canvas) {
         BasicObject object = this.producer.createBasicObject(e.getX(), e.getY());
+        object.setIsSelected(false);
         canvas.add(object);
         object.setDepth(UMLObject.MIN_DEPTH);
         canvas.repaint();
@@ -34,13 +34,11 @@ public class CreateObjectResponse extends Response {
 
     @Override
     public void canvasPressed(MouseEvent e, Canvas canvas) {
-        // TODO Auto-generated method stub
         // empty implementation
     }
 
     @Override
     public void canvasReleased(MouseEvent e, Canvas canvas) {
-        // TODO Auto-generated method stub
         // empty implementation
     }
 

@@ -13,12 +13,13 @@ public abstract class UMLObject extends JPanel {
     /** The value of depth is between 0 and 99 (inclusive). */
     private int depth;
     public static final int MIN_DEPTH = 0;
-    protected boolean isSelected = false;
+    protected boolean isSelected;
     protected UMLObject groupLeader;
 
     public UMLObject() {
         super();
         this.depth = 50; // default depth
+        this.isSelected = false;
     }
 
     public int getDepth() {
@@ -32,6 +33,11 @@ public abstract class UMLObject extends JPanel {
      */
     public void setDepth(int depth) {
         this.getTopLeader().getParent().setComponentZOrder(this, depth);
+    }
+
+    public void setIsSelected(boolean isSelected) {
+        this.isSelected = isSelected;
+        this.repaint();
     }
 
     public UMLObject getTopLeader() {
@@ -55,7 +61,14 @@ public abstract class UMLObject extends JPanel {
     }
 
     /**
-     * Check whether the mouse click the object or not.
+     * Only basic objects should override this method.
+     */
+    public ConnectionPort getClosestPort(int coordinateX, int coordinateY) {
+        return null;
+    }
+    
+    /**
+     * Check whether the mouse clicks the object or not.
      * @param e the MouseEvent
      * @return the boolean value indicates whether the Mouse event happens inside the object or not.
      */

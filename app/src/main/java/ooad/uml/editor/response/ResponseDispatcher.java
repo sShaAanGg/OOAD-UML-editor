@@ -15,11 +15,8 @@ import ooad.uml.editor.graphics.UML.UMLObject;
  */
 public class ResponseDispatcher {
     private static ResponseDispatcher instance = new ResponseDispatcher(); // Eager initialization
-    /** Current response object to handle the mouse event */
+    /** Current Response object to handle the mouse event */
     private Response response;
-    // private Response creator;
-    // private Response selector;
-    // private Response connector;
 
     private ResponseDispatcher() {
     }
