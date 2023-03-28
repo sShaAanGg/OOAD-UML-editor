@@ -64,8 +64,6 @@ public class ConnectionPort extends UMLObject {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Graphics2D g2 = (Graphics2D) g;
-        // TODO: draw the connection port
         // It seems that Point2D do not need to be drawn explicitly
     }
     

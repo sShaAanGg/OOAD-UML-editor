@@ -44,20 +44,17 @@ public class CreateObjectResponse extends Response {
 
     @Override
     public void UMLObjectClicked(MouseEvent e, UMLObject object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'UMLObjectClicked'");
+        // empty implementation
     }
 
     @Override
     public void UMLObjectPressed(MouseEvent e, UMLObject object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'UMLObjectPressed'");
+        // empty implementation
     }
 
     @Override
     public void UMLObjectReleased(MouseEvent e, UMLObject object) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'UMLObjectReleased'");
+        // empty implementation
     }
     
 }
