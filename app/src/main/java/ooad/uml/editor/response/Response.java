@@ -5,9 +5,9 @@ import ooad.uml.editor.graphics.Canvas;
 import ooad.uml.editor.graphics.UML.UMLObject;
 
 /**
- * An abstract class for responses to the mouse events.
- * There are 3 types of responses: create, select, and connect
- * which inherit this class.
+ * {@summary An abstract class for responses to the mouse events.}
+ * Now there are 3 types of responses: create, select, and
+ * connect which inherit this class.
  */
 public abstract class Response {
     private String mode;

@@ -12,7 +12,7 @@ import ooad.uml.editor.graphics.UML.UMLObject;
 import ooad.uml.editor.graphics.UML.connectionLine.ConnectionLine;
 
 /**
- * This class represents the basic object in the canvas.
+ * {@summary This abstract class represents the basic object in the canvas.}
  */
 public abstract class BasicObject extends UMLObject {
     protected final JLabel name;
@@ -38,9 +38,9 @@ public abstract class BasicObject extends UMLObject {
         int portLegnth = 5;
         // int halfLength = portLegnth / 2;
         ConnectionPort top = new ConnectionPort(this, this.width / 2, 0, portLegnth);
-        ConnectionPort bottom = new ConnectionPort(this, this.width / 2, this.height, portLegnth);
+        ConnectionPort bottom = new ConnectionPort(this, this.width / 2, this.height - portLegnth, portLegnth);
         ConnectionPort left = new ConnectionPort(this, 0, this.height / 2, portLegnth);
-        ConnectionPort right = new ConnectionPort(this, this.width, this.height / 2, portLegnth);
+        ConnectionPort right = new ConnectionPort(this, this.width - portLegnth, this.height / 2, portLegnth);
         connectionPorts.add(top);
         connectionPorts.add(bottom);
         connectionPorts.add(left);

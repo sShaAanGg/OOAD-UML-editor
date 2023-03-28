@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import ooad.uml.editor.graphics.UML.basicObject.BasicObject;
 import ooad.uml.editor.graphics.UML.connectionLine.ConnectionLine;
 
+/**
+ * {@summary This class represents the connection port of a BasicObject.}
+ */
 public class ConnectionPort extends UMLObject {
     /** The basicObject this connectionPort belongs to */
     private final BasicObject home;
@@ -61,7 +64,7 @@ public class ConnectionPort extends UMLObject {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
+        // Graphics2D g2 = (Graphics2D) g;
         // TODO: draw the connection port
         // It seems that Point2D do not need to be drawn explicitly
     }

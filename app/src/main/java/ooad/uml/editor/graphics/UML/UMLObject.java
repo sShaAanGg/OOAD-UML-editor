@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 /**
- * This class represents the UML object in the canvas.
+ * {@summary This class represents the UML object in the canvas.}
  * Basic objects and connection lines inherits this class.
  */
 public abstract class UMLObject extends JPanel {

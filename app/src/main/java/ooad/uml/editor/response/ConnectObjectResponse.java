@@ -47,13 +47,11 @@ public class ConnectObjectResponse extends Response {
 
     @Override
     public void UMLObjectPressed(MouseEvent e, UMLObject object) {
-        // TODO Auto-generated method stub
         start = object.getClosestPort(e.getX(), e.getY());
     }
 
     @Override
     public void UMLObjectReleased(MouseEvent e, UMLObject object) {
-        // TODO Auto-generated method stub
         end = object.getClosestPort(e.getX(), e.getY());
         if (start == null || end == null || object == start.getHome()) {
             System.err.println("Invalid connection");
@@ -64,7 +62,7 @@ public class ConnectObjectResponse extends Response {
         ConnectionLine line = this.producer.createConnectionLine(canvas, start, end);
         canvas.add(line);
         object.setDepth(UMLObject.MIN_DEPTH);
-
+        line.setDepth(UMLObject.MIN_DEPTH);
         canvas.repaint();
         line.repaint();
         this.start = null;
