@@ -2,13 +2,15 @@ package ooad.uml.editor.response;
 
 import java.awt.event.MouseEvent;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Point;
 import java.util.ArrayList;
 import javax.swing.SwingUtilities;
 
 import ooad.uml.editor.graphics.Canvas;
-import ooad.uml.editor.graphics.UML.UMLObject;
+import ooad.uml.editor.graphics.UML.*;
 import ooad.uml.editor.graphics.UML.basicObject.BasicObject;
+import ooad.uml.editor.graphics.UML.basicObject.GroupObject;
 
 public class SelectObjectResponse extends Response {
     /** Use ArrayList since we don't perform inserting/removing nodes in/from the middle */
@@ -63,6 +65,25 @@ public class SelectObjectResponse extends Response {
         } else {
             return false;
         }
+    }
+
+    public void groupSelectedObjects() {
+        if (selectedObjects.size() <= 1) {
+            return;
+        }
+
+        Container container = selectedObjects.get(0).getParent();
+        GroupObject groupObject = new GroupObject();
+        groupObject.groupObjects(this.selectedObjects);
+        container.add(groupObject);
+        groupObject.setDepth(UMLObject.MIN_DEPTH);
+        unselectAll();
+        groupObject.setIsSelected(true);
+        this.selectedObjects.add(groupObject);
+    }
+
+    public void ungroupSelectedObjects() {
+
     }
 
     @Override

@@ -2,8 +2,9 @@ package ooad.uml.editor.graphics.UML;
 
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-
 import javax.swing.JPanel;
+
+import ooad.uml.editor.graphics.UML.basicObject.GroupObject;
 
 /**
  * {@summary This class represents the UML object in the canvas.}
@@ -56,8 +57,8 @@ public abstract class UMLObject extends JPanel {
         }
     }
 
-    public void setGroupLeader() {
-
+    public void setGroupLeader(GroupObject groupLeader) {
+        this.groupLeader = groupLeader;
     }
 
     /**
