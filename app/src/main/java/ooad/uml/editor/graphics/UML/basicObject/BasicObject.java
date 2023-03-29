@@ -16,8 +16,8 @@ import ooad.uml.editor.graphics.UML.connectionLine.ConnectionLine;
  */
 public abstract class BasicObject extends UMLObject {
     protected final JLabel name;
-    protected final int width, height;
-    protected final Color borderColor, objectColor;
+    protected int width, height;
+    protected final Color BORDER_COLOR, OBJECT_COLOR;
     /** Use ArrayList since we don't perform inserting/removing nodes in/from the middle */
     protected ArrayList<ConnectionPort> connectionPorts;
 
@@ -26,9 +26,11 @@ public abstract class BasicObject extends UMLObject {
         this.width = width;
         this.height = height;
         this.name = name;
-        this.add(name);
-        this.borderColor = Color.DARK_GRAY;
-        this.objectColor = Color.LIGHT_GRAY;
+        if (name != null)
+            this.add(name);
+
+        this.BORDER_COLOR = Color.DARK_GRAY;
+        this.OBJECT_COLOR = Color.LIGHT_GRAY;
         this.connectionPorts = new ArrayList<>(4); // Capacity = # of ports
         this.setLocation(coordinateX, coordinateY);
         this.setConnectionPorts();
@@ -51,6 +53,13 @@ public abstract class BasicObject extends UMLObject {
         this.add(right);
     }
 
+    public void clearConnectionPorts() {
+        for (ConnectionPort port : connectionPorts) {
+            port.clearPoint();
+        }
+        this.connectionPorts.clear();
+        this.repaint();
+    }
     
     private void setPortsVisible(boolean isVisible) {
         for (ConnectionPort port : connectionPorts) {

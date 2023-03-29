@@ -26,14 +26,14 @@ public class ClassObject extends BasicObject {
 
     @Override
     protected void drawObject(Graphics2D g2) {
-        g2.setPaint(borderColor);
+        g2.setPaint(BORDER_COLOR);
         g2.fill(outerRectangle);
-        g2.setPaint(objectColor);
+        g2.setPaint(OBJECT_COLOR);
         g2.fill(innerRectangle);
 
         Line2D line1 = new Line2D.Double(0, this.height / 3, this.width, this.height / 3);
         Line2D line2 = new Line2D.Double(0, this.height*2 / 3, this.width, this.height*2 /3);
-        g2.setPaint(borderColor);
+        g2.setPaint(BORDER_COLOR);
         g2.draw(line1);
         g2.draw(line2);
     }

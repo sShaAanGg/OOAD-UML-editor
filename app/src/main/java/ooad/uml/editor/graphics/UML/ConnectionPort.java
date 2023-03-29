@@ -45,6 +45,11 @@ public class ConnectionPort extends UMLObject {
         return this.point;
     }
 
+    public void clearPoint() {
+        // this.point = null;
+        this.setOpaque(false);
+    }
+
     public int getPortLength() {
         return this.PortLength;
     }

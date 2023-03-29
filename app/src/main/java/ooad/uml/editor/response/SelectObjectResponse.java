@@ -77,13 +77,23 @@ public class SelectObjectResponse extends Response {
         groupObject.groupObjects(this.selectedObjects);
         container.add(groupObject);
         groupObject.setDepth(UMLObject.MIN_DEPTH);
-        unselectAll();
+        this.unselectAll();
         groupObject.setIsSelected(true);
         this.selectedObjects.add(groupObject);
     }
 
     public void ungroupSelectedObjects() {
+        if (selectedObjects.size() != 1) {
+            return;
+        }
+        UMLObject objectToBeUngrouped = selectedObjects.get(0);
+        if (!(objectToBeUngrouped instanceof GroupObject)) {
+            return;
+        }
 
+        System.out.println("Ungrouping...");
+        ((GroupObject) objectToBeUngrouped).ungroupObjects();;
+        this.unselectAll();
     }
 
     @Override
@@ -94,14 +104,14 @@ public class SelectObjectResponse extends Response {
 
     @Override
     public void canvasPressed(MouseEvent e, Canvas canvas) {
-        System.out.println("Press on canvas");
+        // System.out.println("Press on canvas");
         this.unselectAll();
         this.mousePressedPoint = e.getPoint();
     }
 
     @Override
     public void canvasReleased(MouseEvent e, Canvas canvas) {
-        System.out.println("Release on canvas");
+        // System.out.println("Release on canvas");
         this.unselectAll();
         selectSquare(e, canvas);
     }
@@ -124,6 +134,9 @@ public class SelectObjectResponse extends Response {
     @Override
     public void UMLObjectReleased(MouseEvent e, UMLObject object) {
         // Converts the event to the coordinate system of the canvas.
+        System.out.println(object); // canvas
+        System.out.println(object.getTopLeader()); // group object
+        System.out.println(object.getTopLeader().getParent()); // null
         MouseEvent canvasDestEvent = SwingUtilities.convertMouseEvent(object, e, object.getTopLeader().getParent());
         Canvas canvas = (Canvas) object.getTopLeader().getParent();
         selectSquare(canvasDestEvent, canvas);

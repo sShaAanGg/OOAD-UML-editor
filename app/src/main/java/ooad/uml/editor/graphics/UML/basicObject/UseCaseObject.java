@@ -26,9 +26,9 @@ public class UseCaseObject extends BasicObject {
 
     @Override
     protected void drawObject(Graphics2D g2) {
-        g2.setPaint(this.borderColor);
+        g2.setPaint(this.BORDER_COLOR);
         g2.fill(outerEllipse);
-        g2.setPaint(this.objectColor);
+        g2.setPaint(this.OBJECT_COLOR);
         g2.fill(innerEllipse);
     }
 
