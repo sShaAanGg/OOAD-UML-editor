@@ -1,9 +1,9 @@
 package ooad.uml.editor.graphics.menu.editmenu;
 
 import java.awt.event.ActionEvent;
-import ooad.uml.editor.graphics.menu.MenuItem;
+import ooad.uml.editor.graphics.menu.MenuListenerItem;
 
-public class ChangeNameMenuItem extends MenuItem {
+public class ChangeNameMenuItem extends MenuListenerItem {
     
     public ChangeNameMenuItem(String itemName) {
         super(itemName);

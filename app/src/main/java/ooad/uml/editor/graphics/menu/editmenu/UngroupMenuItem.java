@@ -1,10 +1,10 @@
 package ooad.uml.editor.graphics.menu.editmenu;
 
 import java.awt.event.ActionEvent;
-import ooad.uml.editor.graphics.menu.MenuItem;
+import ooad.uml.editor.graphics.menu.MenuListenerItem;
 import ooad.uml.editor.response.*;
 
-public class UngroupMenuItem extends MenuItem {
+public class UngroupMenuItem extends MenuListenerItem {
 
     public UngroupMenuItem(String itemName) {
         super(itemName);

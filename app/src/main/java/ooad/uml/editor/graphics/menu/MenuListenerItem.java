@@ -5,9 +5,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JMenuItem;
 
-public abstract class MenuItem extends JMenuItem implements ActionListener {
+/**
+ * {@summary This class represents a JMenuItem that implements ActionListener itself.}
+ */
+public abstract class MenuListenerItem extends JMenuItem implements ActionListener {
     
-    public MenuItem(String itemName) {
+    public MenuListenerItem(String itemName) {
         super(itemName);
         this.addActionListener(this);
     }
