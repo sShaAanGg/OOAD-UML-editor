@@ -15,25 +15,26 @@ import ooad.uml.editor.graphics.UML.connectionLine.ConnectionLine;
  * {@summary This abstract class represents the basic object in the canvas.}
  */
 public abstract class BasicObject extends UMLObject {
-    protected final JLabel name;
-    protected int width, height;
+    protected JLabel name;
+    protected int width, height; // TODO: remove these duplicated attributes
     protected final Color BORDER_COLOR, OBJECT_COLOR;
     /** Use ArrayList since we don't perform inserting/removing nodes in/from the middle */
     protected ArrayList<ConnectionPort> connectionPorts;
 
-    public BasicObject(int coordinateX, int coordinateY, int width, int height, JLabel name) {
+    public BasicObject(int coordinateX, int coordinateY, int width, int height) {
         super();
         this.width = width;
         this.height = height;
-        this.name = name;
-        if (name != null)
-            this.add(name);
-
+        
         this.BORDER_COLOR = Color.DARK_GRAY;
         this.OBJECT_COLOR = Color.LIGHT_GRAY;
         this.connectionPorts = new ArrayList<>(4); // Capacity = # of ports
         this.setLocation(coordinateX, coordinateY);
         this.setConnectionPorts();
+    }
+
+    public void setObjectName(String name) {
+        this.name.setText(name);
     }
 
     private void setConnectionPorts() {
@@ -56,6 +57,7 @@ public abstract class BasicObject extends UMLObject {
     public void clearConnectionPorts() {
         for (ConnectionPort port : connectionPorts) {
             port.clearPoint();
+            this.remove(port);
         }
         this.connectionPorts.clear();
         this.repaint();
@@ -83,16 +85,19 @@ public abstract class BasicObject extends UMLObject {
      */
     @Override
     public ConnectionPort getClosestPort(int coordinateX, int coordinateY) {
-        ConnectionPort closestPort = this.connectionPorts.get(0);
-        double minDistance = Double.MAX_VALUE;
-        for (ConnectionPort port : this.connectionPorts) {
-            double distance = Point2D.distance(coordinateX, coordinateY, port.getX(), port.getY());
-            if (distance < minDistance) {
-                minDistance = distance;
-                closestPort = port;
+        if (!this.connectionPorts.isEmpty()) {
+            ConnectionPort closestPort = this.connectionPorts.get(0);
+            double minDistance = Double.MAX_VALUE;
+            for (ConnectionPort port : this.connectionPorts) {
+                double distance = Point2D.distance(coordinateX, coordinateY, port.getX(), port.getY());
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestPort = port;
+                }
             }
+            return closestPort;
         }
-        return closestPort;
+        return null;
     }
     
     @Override

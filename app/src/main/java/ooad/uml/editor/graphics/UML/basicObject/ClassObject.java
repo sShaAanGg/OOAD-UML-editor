@@ -12,12 +12,14 @@ public class ClassObject extends BasicObject {
     private final Rectangle2D innerRectangle;
     
     public ClassObject(int coordinateX, int coordinateY) {
-        super(coordinateX, coordinateY, 120, 150, new JLabel("Class", JLabel.CENTER));
+        super(coordinateX, coordinateY, 120, 150);
         outerRectangle = new Rectangle2D.Double(0, 0, this.width, this.height);
         double borderSize = 1.5;
         innerRectangle = new Rectangle2D.Double(borderSize, borderSize, this.width - borderSize*2, this.height - borderSize*2);
         
         this.setSize(this.width, this.height); // **Without it, the object will not be drawn since it sets the JPanel's size**
+        this.name = new JLabel("Class", JLabel.CENTER);
+        this.add(name);
         this.name.setBounds(0, 0, this.width, this.height / 3);
         this.setLayout(null);
         this.setOpaque(false);

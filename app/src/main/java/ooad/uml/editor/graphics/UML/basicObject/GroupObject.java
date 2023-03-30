@@ -17,7 +17,8 @@ public class GroupObject extends BasicObject {
     
     public GroupObject() {
         // Sets default bounds
-        super(0, 0, 0, 0, null);
+        super(0, 0, 0, 0);
+        this.name = null; // Group object doesn't have a name label
         // super(0, 0, 0, 0, new JLabel("Composite", JLabel.CENTER));
         this.setLayout(null);
         this.setOpaque(false);
@@ -44,31 +45,27 @@ public class GroupObject extends BasicObject {
         this.height = maxY - minY;
         this.clearConnectionPorts();
 
-        Container container = objects.get(0).getParent(); // Get the canvas container first
         for (UMLObject object : objects) {
             object.setGroupLeader(this);
-            container.remove(object);
+            object.getParent().remove(object);
             this.add(object);
-            // object.setLocation(object.getX() - this.getX(), object.getY() - this.getY());
+            object.setLocation(object.getX() - this.getX(), object.getY() - this.getY());
             object.setDepth(UMLObject.MIN_DEPTH);
         }
-        container.repaint();
-        System.out.println(container);
-        container.add(this);
     }
 
-    public void ungroupObjects() {
+    public void ungroupObjects(Component[] components) {
         Container container = this.getParent();
+        // Component[] components = this.getComponents();
         container.remove(this);
 
-        Component[] components = this.getComponents();
         UMLObject object;
         for (Component component : components) {
             object = (UMLObject) component;
             object.setGroupLeader(null);
             this.remove(object);
             container.add(object);
-            // object.setLocation(object.getX() + this.getX(), object.getY() + this.getY());
+            object.setLocation(object.getX() + this.getX(), object.getY() + this.getY());
             object.setDepth(UMLObject.MIN_DEPTH);
         }
         container.repaint();
@@ -78,12 +75,6 @@ public class GroupObject extends BasicObject {
     @Override
     public void setDepth(int depth) {
         super.setDepth(depth);
-        Component[] components = this.getComponents();
-        UMLObject object;
-        for (Component component : components) {
-            object = (UMLObject) component;
-            object.setDepth(UMLObject.MIN_DEPTH);
-        }
     }
 
     /**
@@ -105,10 +96,14 @@ public class GroupObject extends BasicObject {
     @Override 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        super.paintChildren(g);
+        // super.paintChildren(g);
         Graphics2D g2 = (Graphics2D) g;
-        if (this.isSelected)
-            this.drawObject(g2);
+        // if (this.isSelected) {
+        //     this.setOpaque(true);
+        // } else {
+        //     this.setOpaque(false);
+        // }
+        this.drawObject(g2);
     }
     
 }

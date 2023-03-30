@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Point;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import ooad.uml.editor.graphics.Canvas;
@@ -30,7 +31,7 @@ public class SelectObjectResponse extends Response {
     }
 
     /** Use brutal force solution */
-    private void selectSquare(MouseEvent event, Canvas canvas) {
+    private void selectSquare(MouseEvent event, Container canvas) {
         Point mouseReleasedPoint = event.getPoint();
         int minX = Math.min(mousePressedPoint.x, mouseReleasedPoint.x);
         int maxX = Math.max(mousePressedPoint.x, mouseReleasedPoint.x);
@@ -58,42 +59,54 @@ public class SelectObjectResponse extends Response {
         int minY = cornervalues[1];
         int maxX = cornervalues[2];
         int maxY = cornervalues[3];
-        if (object.getX() >= minX && (object.getX() + object.getWidth()) <= maxX 
-                                 && object.getY() >= minY 
-                                 && (object.getY() + object.getHeight()) <= maxY) {
+        if (object.getX() >= minX && (object.getX() + object.getWidth()) <= maxX
+                && object.getY() >= minY
+                && (object.getY() + object.getHeight()) <= maxY) {
             return true;
         } else {
             return false;
         }
     }
 
+    /**
+     * TODO: refactor the following three methods
+     */
     public void groupSelectedObjects() {
-        if (selectedObjects.size() <= 1) {
-            return;
+        if (selectedObjects.size() > 1) {
+            Container container = selectedObjects.get(0).getParent();
+            GroupObject groupObject = new GroupObject();
+            groupObject.groupObjects(this.selectedObjects);
+            container.add(groupObject);
+            groupObject.setDepth(UMLObject.MIN_DEPTH);
+            this.unselectAll();
+            groupObject.setIsSelected(true);
+            this.selectedObjects.add(groupObject);
         }
 
-        Container container = selectedObjects.get(0).getParent();
-        GroupObject groupObject = new GroupObject();
-        groupObject.groupObjects(this.selectedObjects);
-        container.add(groupObject);
-        groupObject.setDepth(UMLObject.MIN_DEPTH);
-        this.unselectAll();
-        groupObject.setIsSelected(true);
-        this.selectedObjects.add(groupObject);
     }
 
     public void ungroupSelectedObjects() {
-        if (selectedObjects.size() != 1) {
-            return;
+        if (selectedObjects.size() == 1) {
+            UMLObject objectToBeUngrouped = selectedObjects.get(0);
+            if ((objectToBeUngrouped instanceof GroupObject)) {
+                // System.out.println("Ungrouping...");
+                ((GroupObject) objectToBeUngrouped).ungroupObjects(objectToBeUngrouped.getComponents());
+                this.unselectAll();
+            }
         }
-        UMLObject objectToBeUngrouped = selectedObjects.get(0);
-        if (!(objectToBeUngrouped instanceof GroupObject)) {
-            return;
-        }
+    }
 
-        System.out.println("Ungrouping...");
-        ((GroupObject) objectToBeUngrouped).ungroupObjects();;
-        this.unselectAll();
+    public void changeObjectName() {
+        if (selectedObjects.size() == 1) {
+            UMLObject objectToBeChanged = selectedObjects.get(0);
+            if ((objectToBeChanged instanceof BasicObject)) {
+                String name = JOptionPane.showInputDialog("Please enter the new name:");
+                if (name != null) {
+                    ((BasicObject) objectToBeChanged).setObjectName(name);
+                }
+            }
+    
+        }
     }
 
     @Override
@@ -129,17 +142,15 @@ public class SelectObjectResponse extends Response {
         this.unselectAll();
         this.selectedObjects.add(object);
         object.setIsSelected(true);
+        this.mousePressedPoint = e.getPoint();
     }
 
     @Override
     public void UMLObjectReleased(MouseEvent e, UMLObject object) {
         // Converts the event to the coordinate system of the canvas.
-        System.out.println(object); // canvas
-        System.out.println(object.getTopLeader()); // group object
-        System.out.println(object.getTopLeader().getParent()); // null
         MouseEvent canvasDestEvent = SwingUtilities.convertMouseEvent(object, e, object.getTopLeader().getParent());
-        Canvas canvas = (Canvas) object.getTopLeader().getParent();
+        Container canvas = object.getTopLeader().getParent();
         selectSquare(canvasDestEvent, canvas);
     }
-    
+
 }
