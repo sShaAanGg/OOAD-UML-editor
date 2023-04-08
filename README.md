@@ -17,10 +17,10 @@ It seems to work well in both WSL2 for Win10 & Win11
     ❯ uname -r
     5.15.90.1-microsoft-standard-WSL2
     ```
-    - Win11
+    - Win11 build 22000.1696
     ```
     ❯ uname -r
-    
+    5.15.90.1-microsoft-standard-WSL2
     ```
 
 - gradle  
@@ -50,4 +50,5 @@ OS:           Linux 5.15.90.1-microsoft-standard-WSL2 amd64
     - The problem is: whenever a **new graphic class is introduced**, this file probably **needs to be changed**.  
     Maybe move these configuration setting to the corresponding graphic class will be better.
     - The solution is: (Refactor) **keep minimal, component independent** information such as `screenWidth`, `screenHeight` stored in Config.java. Move other component dependent info to their own class.
-- 
+- response/ResponseDispatcher.java
+- response/Response.java
