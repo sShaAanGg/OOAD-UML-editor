@@ -17,10 +17,14 @@ public class SelectObjectResponse extends Response {
     /** Use ArrayList since we don't perform inserting/removing nodes in/from the middle */
     private ArrayList<UMLObject> selectedObjects;
     private Point mousePressedPoint;
+    private boolean isInMovingMode;
+    private UMLObject objectToBeMoved;
 
     public SelectObjectResponse() {
         super("select");
         selectedObjects = new ArrayList<>();
+        isInMovingMode = false;
+        objectToBeMoved = null;
     }
 
     private void unselectAll() {
@@ -96,6 +100,16 @@ public class SelectObjectResponse extends Response {
         }
     }
 
+    private void moveSelectedObject(MouseEvent event, UMLObject object) {
+        if (object != null) {
+            object.setLocation(event.getX() - mousePressedPoint.x, event.getY() - mousePressedPoint.y);
+            object.setDepth(UMLObject.MIN_DEPTH);
+            object.getTopLeader().getParent().repaint();
+            isInMovingMode = false;
+            objectToBeMoved = null;
+        }
+    }
+
     public void changeObjectName() {
         if (selectedObjects.size() == 1) {
             UMLObject objectToBeChanged = selectedObjects.get(0);
@@ -126,7 +140,11 @@ public class SelectObjectResponse extends Response {
     public void canvasReleased(MouseEvent e, Canvas canvas) {
         // System.out.println("Release on canvas");
         this.unselectAll();
-        selectSquare(e, canvas);
+        if (this.isInMovingMode) {
+            this.moveSelectedObject(e, this.objectToBeMoved);
+        } else {
+            selectSquare(e, canvas);
+        }
     }
 
     @Override
@@ -143,14 +161,20 @@ public class SelectObjectResponse extends Response {
         this.selectedObjects.add(object);
         object.setIsSelected(true);
         this.mousePressedPoint = e.getPoint();
+        this.isInMovingMode = true;
+        this.objectToBeMoved = object;
     }
 
     @Override
     public void UMLObjectReleased(MouseEvent e, UMLObject object) {
         // Converts the event to the coordinate system of the canvas.
-        MouseEvent canvasDestEvent = SwingUtilities.convertMouseEvent(object, e, object.getTopLeader().getParent());
-        Container canvas = object.getTopLeader().getParent();
-        selectSquare(canvasDestEvent, canvas);
+        MouseEvent parentDestEvent = SwingUtilities.convertMouseEvent(object, e, object.getTopLeader().getParent());
+        if (this.isInMovingMode) {
+            this.moveSelectedObject(parentDestEvent, this.objectToBeMoved);
+        } else {
+            Container canvas = object.getTopLeader().getParent();
+            selectSquare(parentDestEvent, canvas);
+        }
     }
 
 }
