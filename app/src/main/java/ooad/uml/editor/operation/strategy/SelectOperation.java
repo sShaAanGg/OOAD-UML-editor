@@ -22,7 +22,8 @@ public class SelectOperation extends Operation {
     private UMLObject objectToBeMoved;
 
     public SelectOperation() {
-        super("select");
+        // super("select");
+        super(OperationType.SELECT);
         selectedObjects = new ArrayList<>();
         isInMovingMode = false;
         objectToBeMoved = null;

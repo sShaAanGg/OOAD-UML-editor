@@ -20,7 +20,8 @@ public class CreateOperation extends Operation {
      * @param producer the producer produces the basic object
      */
     public CreateOperation(BasicObjectFactory producer) {
-        super("create");
+        // super("create");
+        super(OperationType.CREATE);
         this.producer = producer;
     }
 

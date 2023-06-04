@@ -23,7 +23,8 @@ public class ConnectOperation extends Operation {
      * @param producer the producer produces the connection line
      */
     public ConnectOperation(ConnectionLineFactory producer) {
-        super("connect");
+        // super("connect");
+        super(OperationType.CONNECT);
         this.producer = producer;
     }
 

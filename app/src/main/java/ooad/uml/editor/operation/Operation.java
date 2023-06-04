@@ -12,9 +12,15 @@ import ooad.uml.editor.graphics.UML.UMLObject;
  */
 public abstract class Operation {
     // private String mode;
+    private OperationType type;
     
-    public Operation(String mode) {
+    public Operation(OperationType type) {
         // this.mode = mode;
+        this.type = type;
+    }
+
+    protected enum OperationType {
+        CREATE, SELECT, CONNECT
     }
 
     // public String getMode() {
@@ -39,6 +45,10 @@ public abstract class Operation {
     public abstract void UMLObjectPressed(MouseEvent e, UMLObject object);
     public abstract void UMLObjectReleased(MouseEvent e, UMLObject object);
 
+    /** 
+     * TODO: maybe undo these products from percolating up.
+     * Solve the type issues with the enumeration
+     */
     public void changeObjectName() {
         // only SelectOperation should override this method
     }
