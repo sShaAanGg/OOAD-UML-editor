@@ -1,5 +1,6 @@
 package ooad.uml.editor.graphics.UML;
 
+import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
@@ -69,11 +70,19 @@ public abstract class UMLObject extends JPanel {
     }
     
     /**
-     * Check whether the mouse clicks the object or not.
+     * Check whether the mouse event happens inside the object or not.
      * @param e the MouseEvent
      * @return the boolean value indicates whether the Mouse event happens inside the object or not.
      */
     public abstract boolean isInObject(MouseEvent e);
+
+    public void ungroupObjects(Component[] components) {
+        // only GroupObject should override this method
+    }
+
+    public void setObjectName(String name) {
+        // only BasicObject should override this method
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

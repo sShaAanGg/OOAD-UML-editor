@@ -1,26 +1,28 @@
-package ooad.uml.editor.response;
+package ooad.uml.editor.operation.strategy;
 
 import java.awt.event.MouseEvent;
 
 import ooad.uml.editor.graphics.Canvas;
 import ooad.uml.editor.graphics.UML.*;
 import ooad.uml.editor.graphics.UML.connectionLine.ConnectionLine;
+import ooad.uml.editor.operation.Operation;
+import ooad.uml.editor.operation.factory.ConnectionLineFactory;
 
-public class ConnectObjectResponse extends Response {
+public class ConnectOperation extends Operation {
 
-    @FunctionalInterface
-    public interface ConnectionLineProducer {
-        ConnectionLine createConnectionLine(Canvas canvas, ConnectionPort start, ConnectionPort end);
-    }
+    // @FunctionalInterface
+    // public interface ConnectionLineFactory {
+    //     ConnectionLine createConnectionLine(Canvas canvas, ConnectionPort start, ConnectionPort end);
+    // }
 
-    private ConnectionLineProducer producer;
+    private ConnectionLineFactory producer;
     private ConnectionPort start;
     private ConnectionPort end;
 
     /**
      * @param producer the producer produces the connection line
      */
-    public ConnectObjectResponse(ConnectionLineProducer producer) {
+    public ConnectOperation(ConnectionLineFactory producer) {
         super("connect");
         this.producer = producer;
     }

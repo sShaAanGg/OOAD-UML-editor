@@ -56,7 +56,7 @@ public class ToolBarPanel extends JPanel {
         this.addButtons(useCaseButton);
     }
     
-    protected void addButtons(Button button) {
+    private void addButtons(Button button) {
         this.toolBar.add(button);
         this.buttonGroup.add(button);
     }

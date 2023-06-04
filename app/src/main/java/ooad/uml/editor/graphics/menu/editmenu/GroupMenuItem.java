@@ -2,7 +2,7 @@ package ooad.uml.editor.graphics.menu.editmenu;
 
 import java.awt.event.ActionEvent;
 import ooad.uml.editor.graphics.menu.MenuListenerItem;
-import ooad.uml.editor.response.*;
+import ooad.uml.editor.operation.*;
 
 public class GroupMenuItem extends MenuListenerItem {
 
@@ -12,9 +12,10 @@ public class GroupMenuItem extends MenuListenerItem {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Response currentResponse = ResponseDispatcher.getInstance().getResponse();
-        if (currentResponse instanceof SelectObjectResponse) {
-            ((SelectObjectResponse) currentResponse).groupSelectedObjects();
-        }
+        Operation currentOperation = OperationDispatcher.getInstance().getOperation();
+        currentOperation.groupSelectedObjects();
+        // if (currentOperation instanceof SelectObjectOperation) {
+        //     ((SelectObjectOperation) currentOperation).groupSelectedObjects();
+        // }
     }
 }

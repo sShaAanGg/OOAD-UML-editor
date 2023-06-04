@@ -1,4 +1,4 @@
-package ooad.uml.editor.response;
+package ooad.uml.editor.operation.strategy;
 
 import java.awt.event.MouseEvent;
 import java.awt.Component;
@@ -12,15 +12,16 @@ import ooad.uml.editor.graphics.Canvas;
 import ooad.uml.editor.graphics.UML.*;
 import ooad.uml.editor.graphics.UML.basicObject.BasicObject;
 import ooad.uml.editor.graphics.UML.basicObject.GroupObject;
+import ooad.uml.editor.operation.Operation;
 
-public class SelectObjectResponse extends Response {
+public class SelectOperation extends Operation {
     /** Use ArrayList since we don't perform inserting/removing nodes in/from the middle */
     private ArrayList<UMLObject> selectedObjects;
     private Point mousePressedPoint;
     private boolean isInMovingMode;
     private UMLObject objectToBeMoved;
 
-    public SelectObjectResponse() {
+    public SelectOperation() {
         super("select");
         selectedObjects = new ArrayList<>();
         isInMovingMode = false;
@@ -75,6 +76,7 @@ public class SelectObjectResponse extends Response {
     /**
      * TODO: refactor the following three methods
      */
+    @Override
     public void groupSelectedObjects() {
         if (selectedObjects.size() > 1) {
             Container container = selectedObjects.get(0).getParent();
@@ -89,14 +91,18 @@ public class SelectObjectResponse extends Response {
 
     }
 
+    @Override
     public void ungroupSelectedObjects() {
         if (selectedObjects.size() == 1) {
             UMLObject objectToBeUngrouped = selectedObjects.get(0);
-            if ((objectToBeUngrouped instanceof GroupObject)) {
-                // System.out.println("Ungrouping...");
-                ((GroupObject) objectToBeUngrouped).ungroupObjects(objectToBeUngrouped.getComponents());
-                this.unselectAll();
-            }
+            // System.out.println("Ungrouping...");
+            objectToBeUngrouped.ungroupObjects(objectToBeUngrouped.getComponents());
+            this.unselectAll();
+            // if ((objectToBeUngrouped instanceof GroupObject)) {
+            //     // System.out.println("Ungrouping...");
+            //     ((GroupObject) objectToBeUngrouped).ungroupObjects(objectToBeUngrouped.getComponents());
+            //     this.unselectAll();
+            // }
         }
     }
 
@@ -105,20 +111,29 @@ public class SelectObjectResponse extends Response {
             object.setLocation(event.getX() - mousePressedPoint.x, event.getY() - mousePressedPoint.y);
             object.setDepth(UMLObject.MIN_DEPTH);
             object.getTopLeader().getParent().repaint();
+            // TODO: check the state of selection
+            object.setIsSelected(true);
+            this.selectedObjects.add(object);
+            // end of section to be checked
             isInMovingMode = false;
             objectToBeMoved = null;
         }
     }
 
+    @Override
     public void changeObjectName() {
         if (selectedObjects.size() == 1) {
             UMLObject objectToBeChanged = selectedObjects.get(0);
-            if ((objectToBeChanged instanceof BasicObject)) {
-                String name = JOptionPane.showInputDialog("Please enter the new name:");
-                if (name != null) {
-                    ((BasicObject) objectToBeChanged).setObjectName(name);
-                }
+            String name = JOptionPane.showInputDialog("Please enter the new name:");
+            if (name != null) {
+                objectToBeChanged.setObjectName(name);
             }
+            // if ((objectToBeChanged instanceof BasicObject)) {
+            //     String name = JOptionPane.showInputDialog("Please enter the new name:");
+            //     if (name != null) {
+            //         ((BasicObject) objectToBeChanged).setObjectName(name);
+            //     }
+            // }
     
         }
     }

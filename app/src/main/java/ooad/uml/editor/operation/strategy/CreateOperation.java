@@ -1,23 +1,25 @@
-package ooad.uml.editor.response;
+package ooad.uml.editor.operation.strategy;
 
 import java.awt.event.MouseEvent;
 import ooad.uml.editor.graphics.Canvas;
 import ooad.uml.editor.graphics.UML.UMLObject;
 import ooad.uml.editor.graphics.UML.basicObject.*;
+import ooad.uml.editor.operation.Operation;
+import ooad.uml.editor.operation.factory.BasicObjectFactory;
 
-public class CreateObjectResponse extends Response {
+public class CreateOperation extends Operation {
 
-    @FunctionalInterface
-    public interface BasicObjectProducer {
-        BasicObject createBasicObject(int coordinateX, int coordinateY);
-    }
+    // @FunctionalInterface
+    // public interface BasicObjectFactory {
+    //     BasicObject createBasicObject(int coordinateX, int coordinateY);
+    // }
 
-    private BasicObjectProducer producer;
+    private BasicObjectFactory producer;
 
     /**
      * @param producer the producer produces the basic object
      */
-    public CreateObjectResponse(BasicObjectProducer producer) {
+    public CreateOperation(BasicObjectFactory producer) {
         super("create");
         this.producer = producer;
     }

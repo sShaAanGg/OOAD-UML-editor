@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 import ooad.uml.editor.Config;
 import ooad.uml.editor.graphics.UML.UMLObject;
-import ooad.uml.editor.response.ResponseDispatcher;
+import ooad.uml.editor.operation.OperationDispatcher;
 
 /**
  * This class represents the canvas area in which all UML objects reside.
@@ -32,7 +32,7 @@ public class Canvas extends JPanel {
     }
 
     /**
-     * Pass the event to the ResponseDispatcher to handle it.
+     * Pass the event to the OperationDispatcher to handle it.
      * @param e the MouseEvent to be passed
      */
     private void passEventToDispatcher(MouseEvent event) {
@@ -44,18 +44,18 @@ public class Canvas extends JPanel {
             if (object.isInObject(objectDestEvent)) {
                 UMLObject topLeader = object.getTopLeader();
                 MouseEvent topLeaderDestEvent = SwingUtilities.convertMouseEvent(this, event, topLeader);
-                ResponseDispatcher.getInstance().dispatchObjectMouseResponse(topLeaderDestEvent, topLeader);
+                OperationDispatcher.getInstance().dispatchObjectMouseOperation(topLeaderDestEvent, topLeader);
                 return;
             }
         }
 
-        // No object is clicked so pass the event to `dispatchCanvasMouseResponse`
-        ResponseDispatcher.getInstance().dispatchCanvasMouseResponse(event, this);
+        // No object is clicked so pass the event to `dispatchCanvasMouseOperation`
+        OperationDispatcher.getInstance().dispatchCanvasMouseOperation(event, this);
     }
 
     /**
      * A MouseInputListener for Canvas.
-     * Methods either pass the event to the ResponseDispatcher or do nothing.
+     * Methods either pass the event to the OperationDispatcher or do nothing.
      */
     private record InnerMouseEventListener(Canvas canvas) implements MouseInputListener {
 

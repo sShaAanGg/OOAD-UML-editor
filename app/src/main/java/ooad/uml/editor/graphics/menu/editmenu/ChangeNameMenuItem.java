@@ -2,7 +2,7 @@ package ooad.uml.editor.graphics.menu.editmenu;
 
 import java.awt.event.ActionEvent;
 import ooad.uml.editor.graphics.menu.MenuListenerItem;
-import ooad.uml.editor.response.*;
+import ooad.uml.editor.operation.*;
 
 public class ChangeNameMenuItem extends MenuListenerItem {
     
@@ -12,9 +12,10 @@ public class ChangeNameMenuItem extends MenuListenerItem {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Response currentResponse = ResponseDispatcher.getInstance().getResponse();
-        if (currentResponse instanceof SelectObjectResponse) {
-            ((SelectObjectResponse) currentResponse).changeObjectName();
-        }
+        Operation currentOperation = OperationDispatcher.getInstance().getOperation();
+        currentOperation.changeObjectName();
+        // if (currentOperation instanceof SelectOperation) {
+        //     ((SelectOperation) currentOperation).changeObjectName();
+        // }
     }
 }

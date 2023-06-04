@@ -15,8 +15,10 @@ public class GroupObject extends BasicObject {
     private static final Color GROUP_OBJECT_COLOR = Color.ORANGE;
     
     public GroupObject() {
-        // Sets default bounds
-        super(0, 0, 0, 0);
+        // Sets default bounds; it will be changed later when group() or ungroup() is called
+        super(0, 0);
+        this.setSize(0, 0);
+        super.setConnectionPorts();
         this.name = null; // Group object doesn't have a name label
         // super(0, 0, 0, 0, new JLabel("Composite", JLabel.CENTER));
         this.setLayout(null);
@@ -40,8 +42,7 @@ public class GroupObject extends BasicObject {
                 maxY = object.getY() + object.getHeight();
         }
         this.setBounds(minX, minY, maxX - minX, maxY - minY);
-        this.width = maxX - minX;
-        this.height = maxY - minY;
+        this.setSize(maxX - minX, maxY - minY);
         this.clearConnectionPorts();
 
         for (UMLObject object : objects) {
@@ -53,6 +54,7 @@ public class GroupObject extends BasicObject {
         }
     }
 
+    @Override
     public void ungroupObjects(Component[] components) {
         Container container = this.getParent();
         // Component[] components = this.getComponents();

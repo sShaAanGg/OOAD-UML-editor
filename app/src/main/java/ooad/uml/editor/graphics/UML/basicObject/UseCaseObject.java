@@ -12,15 +12,17 @@ public class UseCaseObject extends BasicObject {
     private final Ellipse2D innerEllipse;
     
     public UseCaseObject(int coordinateX, int coordinateY) {
-        super(coordinateX, coordinateY, 200, 100);
-        outerEllipse = new Ellipse2D.Double(0, 0, this.width, this.height);
+        super(coordinateX, coordinateY);
+        this.setSize(200, 100); // **Without it, the object will not be drawn since it sets the JPanel's size**
+
+        outerEllipse = new Ellipse2D.Double(0, 0, this.getWidth(), this.getHeight());
         double borderSize = 1.5;
-        innerEllipse = new Ellipse2D.Double(borderSize, borderSize, this.width - borderSize*2, this.height - borderSize*2);
+        innerEllipse = new Ellipse2D.Double(borderSize, borderSize, this.getWidth() - borderSize*2, this.getHeight() - borderSize*2);
         
-        this.setSize(this.width, this.height); // **Without it, the object will not be drawn since it sets the JPanel's size**
+        super.setConnectionPorts();
         this.name = new JLabel("Use Case", JLabel.CENTER);
         this.add(name);
-        this.name.setBounds(0, 0, this.width, this.height);
+        this.name.setBounds(0, 0, this.getWidth(), this.getHeight());
         this.setLayout(null);
         this.setOpaque(false);
         this.setVisible(true);

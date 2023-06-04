@@ -12,15 +12,17 @@ public class ClassObject extends BasicObject {
     private final Rectangle2D innerRectangle;
     
     public ClassObject(int coordinateX, int coordinateY) {
-        super(coordinateX, coordinateY, 120, 150);
-        outerRectangle = new Rectangle2D.Double(0, 0, this.width, this.height);
+        super(coordinateX, coordinateY);
+        this.setSize(120, 150); // **Without it, the object will not be drawn since it sets the JPanel's size**
+
+        outerRectangle = new Rectangle2D.Double(0, 0, this.getWidth(), this.getHeight());
         double borderSize = 1.5;
-        innerRectangle = new Rectangle2D.Double(borderSize, borderSize, this.width - borderSize*2, this.height - borderSize*2);
+        innerRectangle = new Rectangle2D.Double(borderSize, borderSize, this.getWidth() - borderSize*2, this.getHeight() - borderSize*2);
         
-        this.setSize(this.width, this.height); // **Without it, the object will not be drawn since it sets the JPanel's size**
+        super.setConnectionPorts();
         this.name = new JLabel("Class", JLabel.CENTER);
         this.add(name);
-        this.name.setBounds(0, 0, this.width, this.height / 3);
+        this.name.setBounds(0, 0, this.getWidth(), this.getHeight() / 3);
         this.setLayout(null);
         this.setOpaque(false);
         this.setVisible(true);
@@ -33,8 +35,8 @@ public class ClassObject extends BasicObject {
         g2.setPaint(OBJECT_COLOR);
         g2.fill(innerRectangle);
 
-        Line2D line1 = new Line2D.Double(0, this.height / 3, this.width, this.height / 3);
-        Line2D line2 = new Line2D.Double(0, this.height*2 / 3, this.width, this.height*2 /3);
+        Line2D line1 = new Line2D.Double(0, this.getHeight() / 3, this.getWidth(), this.getHeight() / 3);
+        Line2D line2 = new Line2D.Double(0, this.getHeight()*2 / 3, this.getWidth(), this.getHeight()*2 /3);
         g2.setPaint(BORDER_COLOR);
         g2.draw(line1);
         g2.draw(line2);
