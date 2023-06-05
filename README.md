@@ -49,6 +49,11 @@ OS:           Linux 5.15.90.1-microsoft-standard-WSL2 amd64
 - Config.java
     - The problem is: whenever a **new graphic class is introduced**, this file probably **needs to be changed**.  
     Maybe move these configuration setting to the corresponding graphic class will be better.
-    - The solution is: (Refactor) **keep minimal, component independent** information such as `screenWidth`, `screenHeight` stored in Config.java. Move other component dependent info to their own class.
-- response/ResponseDispatcher.java
-- response/Response.java
+    - The solution is: (Refactor) **keep minimal, component independent** information such as `screenWidth`, `screenHeight` stored in Config.java. Move other component dependent info to their own classes.
+- operation/OperationDispatcher.java
+    - Serves as the controller of the application; works with Operation and its subclass to form the strategy/state pattern.
+- graphics/UML
+    - UMLObject.java
+        - It's the base class of all UML graphic objects (includes lines and ports).
+    - basicObject/BasicObject.java
+        - It's the base class of all basic objects and extends UMLObject.
