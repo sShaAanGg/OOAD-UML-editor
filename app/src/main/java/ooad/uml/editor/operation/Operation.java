@@ -45,6 +45,15 @@ public abstract class Operation {
     public abstract void UMLObjectPressed(MouseEvent e, UMLObject object);
     public abstract void UMLObjectReleased(MouseEvent e, UMLObject object);
 
+    /**
+     * Empty implementation for subclasses to override if needed. 
+     * e.g. in situations like transition from select operation to another, 
+     * the selection states should be cleared and repainted.
+     * ! NOTE: operation.producer (the factory) should not be cleared.
+     */
+    public void clearStates() {
+    }
+
     /** 
      * TODO: maybe undo these products from percolating up.
      * Solve the type issues with the enumeration

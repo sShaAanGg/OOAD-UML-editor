@@ -80,8 +80,11 @@ public abstract class UMLObject extends JPanel {
         // only GroupObject should override this method
     }
 
+    /**
+     * Only BasicObject should override this method.
+     * GroupObject must override to do nothing.
+     */
     public void setObjectName(String name) {
-        // only BasicObject should override this method
     }
 
     @Override

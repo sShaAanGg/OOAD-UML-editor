@@ -39,6 +39,9 @@ public abstract class BasicObject extends UMLObject {
         this.name.setText(name);
     }
 
+    /**
+     * Adds 4 connection ports to the basic object.
+     */
     protected void setConnectionPorts() {
         int portLegnth = 5;
         // int halfLength = portLegnth / 2;

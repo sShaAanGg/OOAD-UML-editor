@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 // import javax.swing.JLabel;
 
 import java.util.ArrayList;
+
+import ooad.uml.editor.graphics.UML.ConnectionPort;
 import ooad.uml.editor.graphics.UML.UMLObject;
 
 public class GroupObject extends BasicObject {
@@ -44,6 +46,7 @@ public class GroupObject extends BasicObject {
         this.setBounds(minX, minY, maxX - minX, maxY - minY);
         this.setSize(maxX - minX, maxY - minY);
         this.clearConnectionPorts();
+        this.setConnectionPorts();
 
         for (UMLObject object : objects) {
             object.setGroupLeader(this);
@@ -74,8 +77,18 @@ public class GroupObject extends BasicObject {
     }
 
     @Override
+    public ConnectionPort getClosestPort(int coordinateX, int coordinateY) {
+        return null;
+    }
+
+    @Override
     public void setDepth(int depth) {
         super.setDepth(depth);
+    }
+
+    @Override
+    public void setObjectName(String name) {
+        // this (a GroupObject) doesn't have a name label
     }
 
     /**

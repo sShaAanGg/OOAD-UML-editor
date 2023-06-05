@@ -183,6 +183,7 @@ public class SelectOperation extends Operation {
 
     @Override
     public void UMLObjectReleased(MouseEvent e, UMLObject object) {
+        this.unselectAll();
         // Converts the event to the coordinate system of the canvas.
         MouseEvent parentDestEvent = SwingUtilities.convertMouseEvent(object, e, object.getTopLeader().getParent());
         if (this.isInMovingMode) {
@@ -191,6 +192,14 @@ public class SelectOperation extends Operation {
             Container canvas = object.getTopLeader().getParent();
             selectSquare(parentDestEvent, canvas);
         }
+    }
+
+    @Override
+    public void clearStates() {
+        this.unselectAll();
+        this.mousePressedPoint = null;
+        this.isInMovingMode = false;
+        this.objectToBeMoved = null;
     }
 
 }

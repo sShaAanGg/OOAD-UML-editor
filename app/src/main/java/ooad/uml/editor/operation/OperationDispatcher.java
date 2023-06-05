@@ -3,6 +3,7 @@ package ooad.uml.editor.operation;
 import java.awt.event.MouseEvent;
 import ooad.uml.editor.graphics.Canvas;
 import ooad.uml.editor.graphics.UML.UMLObject;
+import ooad.uml.editor.operation.strategy.*;
 /**
  * The operation dispatcher handles the MouseEvents and sends/dispatches 
  * appropriate operations with methods in the actual {@link #operation} object.
@@ -16,17 +17,23 @@ import ooad.uml.editor.graphics.UML.UMLObject;
  */
 public class OperationDispatcher {
     private static OperationDispatcher instance = new OperationDispatcher(); // Eager initialization
-    /** Current Operation object to handle the mouse event */
+    /** Current operation to handle the mouse event and interact with UML objects */
     private Operation operation;
 
     private OperationDispatcher() {
+        this.operation = new SelectOperation(); // default operation
     }
 
     public static OperationDispatcher getInstance() {
         return instance;
     }
 
+    /**
+     * Set the operation after clear the states of the previous operation.
+     * @param operation the operation to be used
+     */
     public void setOperation(Operation operation) {
+        this.operation.clearStates();
         this.operation = operation;
     }
     

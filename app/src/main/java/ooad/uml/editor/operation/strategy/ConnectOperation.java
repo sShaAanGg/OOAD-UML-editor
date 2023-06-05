@@ -71,5 +71,11 @@ public class ConnectOperation extends Operation {
         this.start = null;
         this.end = null;
     }
+
+    @Override
+    public void clearStates() {
+        this.start = null;
+        this.end = null;
+    }
     
 }
