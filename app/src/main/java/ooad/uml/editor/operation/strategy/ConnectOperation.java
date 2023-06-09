@@ -9,12 +9,6 @@ import ooad.uml.editor.operation.Operation;
 import ooad.uml.editor.operation.factory.ConnectionLineFactory;
 
 public class ConnectOperation extends Operation {
-
-    // @FunctionalInterface
-    // public interface ConnectionLineFactory {
-    //     ConnectionLine createConnectionLine(Canvas canvas, ConnectionPort start, ConnectionPort end);
-    // }
-
     private ConnectionLineFactory producer;
     private ConnectionPort start;
     private ConnectionPort end;
@@ -23,7 +17,6 @@ public class ConnectOperation extends Operation {
      * @param producer the producer produces the connection line
      */
     public ConnectOperation(ConnectionLineFactory producer) {
-        // super("connect");
         super(OperationType.CONNECT);
         this.producer = producer;
     }

@@ -22,7 +22,6 @@ public class SelectOperation extends Operation {
     private UMLObject objectToBeMoved;
 
     public SelectOperation() {
-        // super("select");
         super(OperationType.SELECT);
         selectedObjects = new ArrayList<>();
         isInMovingMode = false;
@@ -65,7 +64,8 @@ public class SelectOperation extends Operation {
         int minY = cornervalues[1];
         int maxX = cornervalues[2];
         int maxY = cornervalues[3];
-        if (object.getX() >= minX && (object.getX() + object.getWidth()) <= maxX
+        if (object.getX() >= minX
+                && (object.getX() + object.getWidth()) <= maxX
                 && object.getY() >= minY
                 && (object.getY() + object.getHeight()) <= maxY) {
             return true;

@@ -8,19 +8,12 @@ import ooad.uml.editor.operation.Operation;
 import ooad.uml.editor.operation.factory.BasicObjectFactory;
 
 public class CreateOperation extends Operation {
-
-    // @FunctionalInterface
-    // public interface BasicObjectFactory {
-    //     BasicObject createBasicObject(int coordinateX, int coordinateY);
-    // }
-
     private BasicObjectFactory producer;
 
     /**
      * @param producer the producer produces the basic object
      */
     public CreateOperation(BasicObjectFactory producer) {
-        // super("create");
         super(OperationType.CREATE);
         this.producer = producer;
     }

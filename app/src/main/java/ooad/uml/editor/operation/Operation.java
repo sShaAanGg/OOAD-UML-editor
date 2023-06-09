@@ -11,11 +11,9 @@ import ooad.uml.editor.graphics.UML.UMLObject;
  * connect which inherit this class.
  */
 public abstract class Operation {
-    // private String mode;
     private OperationType type;
     
     public Operation(OperationType type) {
-        // this.mode = mode;
         this.type = type;
     }
 
@@ -23,9 +21,9 @@ public abstract class Operation {
         CREATE, SELECT, CONNECT
     }
 
-    // public String getMode() {
-    //     return mode;
-    // }
+    public OperationType getType() {
+        return type;
+    }
 
     /**
      * Operation for the mouse event on the canvas.
@@ -55,7 +53,7 @@ public abstract class Operation {
     }
 
     /** 
-     * TODO: maybe undo these products from percolating up.
+     * TODO: maybe remove these products from percolating up.
      * Solve the type issues with the enumeration
      */
     public void changeObjectName() {

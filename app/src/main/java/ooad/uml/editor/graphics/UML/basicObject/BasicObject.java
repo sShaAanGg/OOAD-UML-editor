@@ -17,15 +17,12 @@ import ooad.uml.editor.graphics.UML.connectionLine.ConnectionLine;
  */
 public abstract class BasicObject extends UMLObject {
     protected JLabel name;
-    // protected int width, height; // TODO: remove these duplicated attributes
     protected final Color BORDER_COLOR, OBJECT_COLOR;
     /** Use ArrayList since we don't perform inserting/removing nodes in/from the middle */
     protected ArrayList<ConnectionPort> connectionPorts;
 
     public BasicObject(int coordinateX, int coordinateY) {
         super();
-        // this.getWidth() = width;
-        // this.getHeight() = height;
         
         this.BORDER_COLOR = Color.DARK_GRAY;
         this.OBJECT_COLOR = Color.LIGHT_GRAY;
