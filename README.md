@@ -60,3 +60,6 @@ OS:           Linux 5.15.90.1-microsoft-standard-WSL2 amd64
 
 ## The class diagram (I know it looks terrible)
 ![The class diagram](https://github.com/sShaAanGg/OOAD-UML-editor/blob/main/uml-editor.drawio.png)
+
+## Reference
+[The code by a student from the same course in the previous year](https://github.com/wasabi-neko/simple-UML-editor)
