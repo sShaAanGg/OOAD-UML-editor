@@ -57,3 +57,6 @@ OS:           Linux 5.15.90.1-microsoft-standard-WSL2 amd64
         - It's the base class of all UML graphic objects (includes lines and ports).
     - basicObject/BasicObject.java
         - It's the base class of all basic objects and extends UMLObject.
+
+## The class diagram (I know it looks terrible)
+![The class diagram](https://github.com/sShaAanGg/OOAD-UML-editor/blob/main/uml-editor.drawio.png)
