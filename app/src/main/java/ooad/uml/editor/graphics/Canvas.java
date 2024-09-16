@@ -57,8 +57,12 @@ public class Canvas extends JPanel {
      * A MouseInputListener for Canvas.
      * Methods either pass the event to the OperationDispatcher or do nothing.
      */
-    private record InnerMouseEventListener(Canvas canvas) implements MouseInputListener {
-
+    private class InnerMouseEventListener implements MouseInputListener {
+        private Canvas canvas;
+        private InnerMouseEventListener(Canvas canvas) {
+            this.canvas = canvas;
+        }
+    
         @Override
         public void mouseClicked(MouseEvent e) {
             canvas.passEventToDispatcher(e);

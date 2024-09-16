@@ -87,19 +87,19 @@ public abstract class BasicObject extends UMLObject {
      */
     @Override
     public ConnectionPort getClosestPort(int coordinateX, int coordinateY) {
-        if (!this.connectionPorts.isEmpty()) {
-            ConnectionPort closestPort = this.connectionPorts.get(0);
-            double minDistance = Double.MAX_VALUE;
-            for (ConnectionPort port : this.connectionPorts) {
-                double distance = Point2D.distance(coordinateX, coordinateY, port.getX(), port.getY());
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestPort = port;
-                }
-            }
-            return closestPort;
+        if (this.connectionPorts.isEmpty()) {
+            return null;
         }
-        return null;
+        ConnectionPort closestPort = this.connectionPorts.get(0);
+        double minDistance = Double.MAX_VALUE;
+        for (ConnectionPort port : this.connectionPorts) {
+            double distance = Point2D.distance(coordinateX, coordinateY, port.getX(), port.getY());
+            if (distance < minDistance) {
+                minDistance = distance;
+                closestPort = port;
+            }
+        }
+        return closestPort;
     }
     
     @Override
